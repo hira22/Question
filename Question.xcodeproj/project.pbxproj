@@ -7,12 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B6DDD73125628E7B00E5F633 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD73025628E7B00E5F633 /* Question.swift */; };
+		B6DDD74C2566305300E5F633 /* TextQuestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD74B2566305300E5F633 /* TextQuestionViewModel.swift */; };
+		B6DDD7542566307100E5F633 /* CheckboxQuestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD7532566307100E5F633 /* CheckboxQuestionViewModel.swift */; };
+		B6DDD7592566308500E5F633 /* RadioQuestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD7582566308500E5F633 /* RadioQuestionViewModel.swift */; };
 		B6F7302625621A11009FA597 /* QuestionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F7302525621A11009FA597 /* QuestionApp.swift */; };
 		B6F7302825621A11009FA597 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F7302725621A11009FA597 /* ContentView.swift */; };
 		B6F7302A25621A12009FA597 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6F7302925621A12009FA597 /* Assets.xcassets */; };
 		B6F7302D25621A12009FA597 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B6F7302C25621A12009FA597 /* Preview Assets.xcassets */; };
 		B6F7303825621A12009FA597 /* QuestionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F7303725621A12009FA597 /* QuestionTests.swift */; };
 		B6F7304325621A12009FA597 /* QuestionUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F7304225621A12009FA597 /* QuestionUITests.swift */; };
+		B6F7305425621A2E009FA597 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6F7305325621A2E009FA597 /* QuestionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +38,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B6DDD73025628E7B00E5F633 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		B6DDD74B2566305300E5F633 /* TextQuestionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextQuestionViewModel.swift; sourceTree = "<group>"; };
+		B6DDD7532566307100E5F633 /* CheckboxQuestionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxQuestionViewModel.swift; sourceTree = "<group>"; };
+		B6DDD7582566308500E5F633 /* RadioQuestionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioQuestionViewModel.swift; sourceTree = "<group>"; };
 		B6F7302225621A11009FA597 /* Question.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Question.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6F7302525621A11009FA597 /* QuestionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionApp.swift; sourceTree = "<group>"; };
 		B6F7302725621A11009FA597 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -45,6 +54,7 @@
 		B6F7303E25621A12009FA597 /* QuestionUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QuestionUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B6F7304225621A12009FA597 /* QuestionUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionUITests.swift; sourceTree = "<group>"; };
 		B6F7304425621A12009FA597 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B6F7305325621A2E009FA597 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +82,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B6DDD74A2566303000E5F633 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				B6DDD74B2566305300E5F633 /* TextQuestionViewModel.swift */,
+				B6DDD7532566307100E5F633 /* CheckboxQuestionViewModel.swift */,
+				B6DDD7582566308500E5F633 /* RadioQuestionViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		B6F7301925621A11009FA597 = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +117,9 @@
 			children = (
 				B6F7302525621A11009FA597 /* QuestionApp.swift */,
 				B6F7302725621A11009FA597 /* ContentView.swift */,
+				B6F7305325621A2E009FA597 /* QuestionView.swift */,
+				B6DDD74A2566303000E5F633 /* ViewModel */,
+				B6DDD73025628E7B00E5F633 /* Question.swift */,
 				B6F7302925621A12009FA597 /* Assets.xcassets */,
 				B6F7302E25621A12009FA597 /* Info.plist */,
 				B6F7302B25621A12009FA597 /* Preview Content */,
@@ -260,6 +283,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B6F7302825621A11009FA597 /* ContentView.swift in Sources */,
+				B6DDD73125628E7B00E5F633 /* Question.swift in Sources */,
+				B6DDD74C2566305300E5F633 /* TextQuestionViewModel.swift in Sources */,
+				B6DDD7592566308500E5F633 /* RadioQuestionViewModel.swift in Sources */,
+				B6DDD7542566307100E5F633 /* CheckboxQuestionViewModel.swift in Sources */,
+				B6F7305425621A2E009FA597 /* QuestionView.swift in Sources */,
 				B6F7302625621A11009FA597 /* QuestionApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
