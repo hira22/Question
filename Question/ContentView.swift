@@ -21,6 +21,7 @@ struct ContentView: View {
         }
         .enumerated()
         .map { (index: Int, question: Question) -> QuestionViewModelProtocol in
+            let index = index + 1
             switch (question.option, question.answer) {
             case (.string, .string):
                 return TextQuestionViewModel(index: index, question: question)
@@ -52,7 +53,9 @@ let json: Data = """
       "Swift",
       "Coding"
     ],
-    "answer": null
+    "answer": [
+      "Happy"
+    ]
   },
   {
     "title": "予定",
@@ -61,17 +64,12 @@ let json: Data = """
       "Swift",
       "Coding"
     ],
-    "answer": null
+    "answer": "Swift"
   },
   {
     "title": "ご意見、ご感想",
-    "option": "Happy Swift Coding",
-    "answer": ["Happy","Swift", "Coding"]
-  },
-    {
-    "title": "ご意見、ご感想",
     "option": "Happy",
-    "answer": null
+    "answer": ""
   }
 ]
 """.data(using: .utf8)!
