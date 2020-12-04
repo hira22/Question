@@ -11,26 +11,16 @@ struct ContentView: View {
     var body: some View {
         let qs: [Question] = try! JSONDecoder().decode([Question].self, from: json)
         
-        let questions: [QuestionViewModelProtocol] = qs.compactMap {
-            switch ($0.option, $0.answer) {
-            case (.string, .string), (.stringArray, .string), (.stringArray, .stringArray):
-                return $0
-            default:
-                return nil
-            }
-        }
-        .enumerated()
+        let questions: [QuestionViewModelProtocol] = qs.enumerated()
         .map { (index: Int, question: Question) -> QuestionViewModelProtocol in
             let index = index + 1
-            switch (question.option, question.answer) {
-            case (.string, .string):
+            switch (question.option?.selection, question.option?.placeholder) {
+            case (.none, _):
                 return TextQuestionViewModel(index: index, question: question)
-            case (.stringArray, .string):
+            case (.stringArray, .single):
                 return RadioQuestionViewModel(index: index, question: question)
-            case (.stringArray, .stringArray):
+            case (.stringArray, .multiple), (.stringArray, .none):
                 return CheckboxQuestionViewModel(index: index, question: question)
-            default:
-                fatalError()
             }
         }
         
@@ -47,29 +37,36 @@ struct ContentView_Previews: PreviewProvider {
 let json: Data = """
 [
   {
-    "title": "理由",
-    "option": [
-      "Happy",
-      "Swift",
-      "Coding"
-    ],
-    "answer": [
-      "Happy"
-    ]
+    "title": "Question 1",
+    "subtitle": "Question 1 subtitle",
+    "option": {
+        "selection": [
+            "Happy",
+            "Swift",
+            "Coding"
+        ],
+        "placeholder": [
+            "Happy"
+        ]
+    }
   },
   {
-    "title": "予定",
-    "option": [
-      "Happy",
-      "Swift",
-      "Coding"
-    ],
-    "answer": "Swift"
+    "title": "Question 2",
+    "option": {
+        "selection": [
+            "Happy",
+            "Swift",
+            "Coding"
+        ],
+        "placeholder": "Swift"
+    }
   },
   {
-    "title": "ご意見、ご感想",
-    "option": "Happy",
-    "answer": ""
+    "title": "Question 3",
+    "option": {
+        "selection": null,
+        "placeholder": "Swift"
+    }
   }
 ]
 """.data(using: .utf8)!

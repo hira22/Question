@@ -8,34 +8,38 @@
 import Foundation
 
 class TextQuestionViewModel: QuestionViewModelProtocol, ObservableObject, QuestionAnswerable {
-    typealias Option = String
-    typealias Answer = String
-    
     var index: Int
     var title: String?
-    var option: Option = ""
+    var subtitle: String?
+
+    typealias Selection = String
+    typealias Answer = String
+    
+    var selections: Selection? = nil
+    var placeholder: Answer?
     @Published var answer: Answer = ""
     
     init(index: Int, question: Question) {
         self.index = index
         self.title = question.title
-        if case .string(let option) = question.option,
-           case .string(let answer) = question.answer {
-            self.option = option
-            self.answer = answer
+        self.subtitle = question.subtitle
+        
+        if case .single(let placeholder) = question.option?.placeholder {
+            self.placeholder = placeholder
+            self.answer = placeholder
         }
     }
     
-    init(index: Int, title: String, option: Option  ,answer: Answer) {
+    init(index: Int, title: String, placeholder: Answer, answer: Answer) {
         self.index = index
         self.title = title
-        self.option = option
+        self.placeholder = placeholder
         self.answer = answer
     }
 }
 
 extension TextQuestionViewModel {
     func asQuestion() -> Question {
-        Question(title: title, option: .string(option), answer: .string(answer))
+        Question(title: title, subtitle: subtitle, option: Option(placeholder: .single(placeholder ?? ""), selection: nil), answer: .single(answer))
     }
 }

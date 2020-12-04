@@ -3,29 +3,36 @@
 ```
 [
     {
-        "title": "理由",
-        "option": [
-            "Happy",
-            "Swift",
-            "Coding"
-        ],
-        "answer": [
-            "Happy"
-        ]
+        "title": "Question 1",
+        "subtitle": "Question 1 subtitle",
+        "option": {
+            "selection": [
+                "Happy",
+                "Swift",
+                "Coding"
+            ],
+            "placeholder": [
+                "Happy"
+            ]
+        }
     },
     {
-        "title": "予定",
-        "option": [
-            "Happy",
-            "Swift",
-            "Coding"
-        ],
-        "answer": "Swift"
+        "title": "Question 2",
+        "option": {
+            "selection": [
+                "Happy",
+                "Swift",
+                "Coding"
+            ],
+            "placeholder": "Swift"
+        }
     },
     {
-        "title": "ご意見、ご感想",
-        "option": "",
-        "answer": ""
+        "title": "Question 3",
+        "option": {
+            "selection": null,
+            "placeholder": "Swift"
+        }
     }
 ]
 ```

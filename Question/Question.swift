@@ -8,6 +8,7 @@ import Foundation
 // MARK: - QuestionElement
 struct Question: Codable {
     let title: String?
+    let subtitle: String?
 //    let inputType: InputType
     let option: Option?
     let answer: Answer?
@@ -24,17 +25,17 @@ struct Question: Codable {
 //}
 
 enum Answer: Codable {
-    case string(String)
-    case stringArray([String])
+    case single(String)
+    case multiple([String])
     
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let x = try? container.decode([String].self) {
-            self = .stringArray(x)
+            self = .multiple(x)
             return
         }
         if let x = try? container.decode(String.self) {
-            self = .string(x)
+            self = .single(x)
             return
         }
         throw DecodingError.typeMismatch(Answer.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for Answer"))
@@ -43,16 +44,20 @@ enum Answer: Codable {
     func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         switch self {
-        case .string(let x):
+        case .single(let x):
             try container.encode(x)
-        case .stringArray(let x):
+        case .multiple(let x):
             try container.encode(x)
         }
     }
 }
 
-enum Option: Codable {
-    case string(String)
+struct Option: Codable {
+    let placeholder: Answer?
+    let selection: Selection?
+}
+
+enum Selection: Codable {
     case stringArray([String])
     
     init(from decoder: Decoder) throws {
@@ -61,18 +66,13 @@ enum Option: Codable {
             self = .stringArray(x)
             return
         }
-        if let x = try? container.decode(String.self) {
-            self = .string(x)
-            return
-        }
+
         throw DecodingError.typeMismatch(Option.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for Option"))
     }
     
     func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         switch self {
-        case .string(let x):
-            try container.encode(x)
         case .stringArray(let x):
             try container.encode(x)
         }

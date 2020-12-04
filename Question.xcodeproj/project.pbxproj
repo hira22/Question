@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B6748E492579BB5F00A8C4B9 /* sample.png in Resources */ = {isa = PBXBuildFile; fileRef = B6748E482579BB5F00A8C4B9 /* sample.png */; };
 		B69531C42569DCF500D9A028 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = B69531C32569DCF500D9A028 /* README.md */; };
-		B69531CA2569E59500D9A028 /* sample.png in Resources */ = {isa = PBXBuildFile; fileRef = B69531C92569E59500D9A028 /* sample.png */; };
 		B6DDD73125628E7B00E5F633 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD73025628E7B00E5F633 /* Question.swift */; };
 		B6DDD74C2566305300E5F633 /* TextQuestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD74B2566305300E5F633 /* TextQuestionViewModel.swift */; };
 		B6DDD7542566307100E5F633 /* CheckboxQuestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6DDD7532566307100E5F633 /* CheckboxQuestionViewModel.swift */; };
@@ -40,8 +40,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B6748E482579BB5F00A8C4B9 /* sample.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample.png; sourceTree = "<group>"; };
 		B69531C32569DCF500D9A028 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		B69531C92569E59500D9A028 /* sample.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sample.png; sourceTree = "<group>"; };
 		B6DDD73025628E7B00E5F633 /* Question.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		B6DDD74B2566305300E5F633 /* TextQuestionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextQuestionViewModel.swift; sourceTree = "<group>"; };
 		B6DDD7532566307100E5F633 /* CheckboxQuestionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxQuestionViewModel.swift; sourceTree = "<group>"; };
@@ -89,7 +89,7 @@
 		B69531C82569E54E00D9A028 /* images */ = {
 			isa = PBXGroup;
 			children = (
-				B69531C92569E59500D9A028 /* sample.png */,
+				B6748E482579BB5F00A8C4B9 /* sample.png */,
 			);
 			path = images;
 			sourceTree = "<group>";
@@ -271,7 +271,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B69531C42569DCF500D9A028 /* README.md in Resources */,
-				B69531CA2569E59500D9A028 /* sample.png in Resources */,
+				B6748E492579BB5F00A8C4B9 /* sample.png in Resources */,
 				B6F7302D25621A12009FA597 /* Preview Assets.xcassets in Resources */,
 				B6F7302A25621A12009FA597 /* Assets.xcassets in Resources */,
 			);

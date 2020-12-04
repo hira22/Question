@@ -20,13 +20,13 @@ struct QuestionView: View {
                         switch question {
                         case let text as TextQuestionViewModel:
                             QuestionLabel(question: question)
-                            QuestionTextField(question: text).padding(.leading, 16)
+                            QuestionTextField(question: text).padding(.leading, 25.0)
                         case let radio as RadioQuestionViewModel:
                             QuestionLabel(question: question)
-                            QuestionRadio(question: radio).padding(.leading, 16)
+                            QuestionRadio(question: radio).padding(.leading, 25.0)
                         case let checkbox as CheckboxQuestionViewModel:
                             QuestionLabel(question: question)
-                            QuestionCheckbox(question: checkbox).padding(.leading, 16)
+                            QuestionCheckbox(question: checkbox).padding(.leading, 25.0)
                         default:
                             EmptyView()
                         }
@@ -52,7 +52,7 @@ struct QuestionView: View {
 struct QuestionView_Previews: PreviewProvider {
     static var previews: some View {
         let questions: [QuestionViewModelProtocol] = [
-            TextQuestionViewModel(index: 1, title: "テキスト入力", option: "", answer: "Hello"),
+            TextQuestionViewModel(index: 1, title: "テキスト入力", placeholder: "", answer: "Hello"),
             RadioQuestionViewModel(index: 2, title: "単一選択", option: ["Hello", "World", "Swift"], answer: "Hello"),
             CheckboxQuestionViewModel(index: 3, title: "複数選択", option: ["Hello", "World", "Swift"], answer: ["World", "Swift"])
         ]
@@ -64,14 +64,20 @@ struct QuestionLabel: View {
     var question: QuestionViewModelProtocol
     
     var body: some View {
-        HStack {
+        HStack(alignment: .top) {
             Image(systemName: "\(question.index).circle.fill")
                 .resizable()
                 .frame(width: 25.0, height: 25.0)
                 .foregroundColor(.blue)
-            
-            Text(question.title ?? "")
-                .font(.headline)
+            VStack(alignment: .leading) {
+                Text(question.title ?? "")
+                    .font(.headline)
+                    .frame(height: 25.0)
+                if let subtitle = question.subtitle {
+                    Text(subtitle)
+                        .font(.subheadline)
+                }
+            }
         }
     }
 }
@@ -89,7 +95,7 @@ struct QuestionTextField: View {
                             .stroke(Color.gray)
                     )
             } else {
-                TextField(question.option, text: $question.answer)
+                TextField(question.placeholder ?? "", text: $question.answer)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
             }
         }
@@ -101,7 +107,7 @@ struct QuestionCheckbox: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            ForEach(question.option, id: \.self) { option in
+            ForEach(question.selections ?? [], id: \.self) { option in
                 Button(
                     action: {
                         if let index = question.answer.firstIndex(of: option) {
@@ -132,7 +138,7 @@ struct QuestionRadio: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            ForEach(question.option, id: \.self) { option in
+            ForEach(question.selections ?? [], id: \.self) { option in
                 Button(
                     action: { question.answer = option },
                     label: {
@@ -155,13 +161,15 @@ struct QuestionRadio: View {
 protocol QuestionViewModelProtocol {
     var index: Int { get set }
     var title: String? { get set }
+    var subtitle: String? { get set }
 }
 
 protocol QuestionAnswerable: QuestionViewModelProtocol {
-    associatedtype Option
+    associatedtype Selection
     associatedtype Answer
 
-    var option: Option { get set }
+    var selections: Selection? { get set }
+    var placeholder: Answer? { get set}
     var answer: Answer { get set }
     
     func asQuestion() -> Question
