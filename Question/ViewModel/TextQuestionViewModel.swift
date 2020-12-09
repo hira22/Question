@@ -26,7 +26,6 @@ class TextQuestionViewModel: QuestionViewModelProtocol, ObservableObject, Questi
         if case .text(let option) = question.input,
            let text = option as? Input.Text {
             self.placeholder = text.placeholder
-            self.answer = text.placeholder ?? ""
         }
     }
     
