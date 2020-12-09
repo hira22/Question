@@ -44,7 +44,7 @@ struct QuestionView: View {
                     RoundedRectangle(cornerRadius: 10)
                     Text("送信する").foregroundColor(.white).bold()
                 }
-            }).frame(width: 200, height: 48)
+            }).frame(width: 200, height: 48).padding()
         }
     }
 }
@@ -52,11 +52,12 @@ struct QuestionView: View {
 struct QuestionView_Previews: PreviewProvider {
     static var previews: some View {
         let questions: [QuestionViewModelProtocol] = [
-            TextQuestionViewModel(index: 1, title: "テキスト入力", placeholder: "", answer: "Hello"),
+            TextQuestionViewModel(index: 1, title: "テキスト入力", placeholder: "Aaaaa", answer: ""),
             RadioQuestionViewModel(index: 2, title: "単一選択", option: ["Hello", "World", "Swift"], answer: "Hello"),
             CheckboxQuestionViewModel(index: 3, title: "複数選択", option: ["Hello", "World", "Swift"], answer: ["World", "Swift"])
         ]
         QuestionView(questions: questions)
+            .previewDevice("iPod touch (7th generation)")
     }
 }
 
@@ -88,12 +89,21 @@ struct QuestionTextField: View {
     var body: some View {
         VStack(alignment: .leading) {
             if #available(iOS 14.0, *) {
-                TextEditor(text: $question.answer)
-                    .frame(height: 100)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color.gray)
-                    )
+                
+                ZStack(alignment: .topLeading) {
+
+                    TextEditor(text: $question.answer)
+                        .frame(height: 100)
+                        .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.gray))
+                    
+                    if question.answer.isEmpty {
+                        Text(question.placeholder ?? "")
+                            .foregroundColor(Color(UIColor.placeholderText))
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 8)
+                    }
+                    
+                }
             } else {
                 TextField(question.placeholder ?? "", text: $question.answer)
                     .textFieldStyle(RoundedBorderTextFieldStyle())

@@ -13,7 +13,7 @@ class RadioQuestionViewModel: QuestionViewModelProtocol, ObservableObject, Quest
     var subtitle: String?
     
     func asQuestion() -> Question {
-        Question(title: title, subtitle: subtitle, option: Option(placeholder: .single(placeholder ?? ""), selection: .stringArray(selections ?? [])), answer: .single(answer))
+        Question(title: title, subtitle: subtitle, input: .radio(option: Input.Radio(placeholder: placeholder, selections: selections ?? [])), answer: .single(answer))
     }
 
     typealias Selection = [String]
@@ -28,13 +28,13 @@ class RadioQuestionViewModel: QuestionViewModelProtocol, ObservableObject, Quest
         self.title = question.title
         self.subtitle = question.subtitle
         
-        if case .stringArray(let selections) = question.option?.selection {
-            self.selections = selections
+        if case .radio(let option) = question.input,
+           let radio = option as? Input.Radio {
+            self.placeholder = radio.placeholder
+            self.answer = radio.placeholder ?? ""
+            self.selections = radio.selections
         }
-        if case .single(let placeholder) = question.option?.placeholder {
-            self.placeholder = placeholder
-            self.answer = placeholder
-        }
+
     }
     
     init(index: Int, title: String, option: Selection ,answer: Answer) {

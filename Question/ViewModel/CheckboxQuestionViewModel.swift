@@ -14,14 +14,14 @@ class CheckboxQuestionViewModel: QuestionViewModelProtocol, ObservableObject, Qu
     var subtitle: String?
     
     func asQuestion() -> Question {
-        Question(title: title, subtitle: subtitle, option: Option(placeholder: .multiple(placeholder ?? []), selection: .stringArray(selections ?? [])), answer: .multiple(answer))
+        Question(title: title, subtitle: subtitle, input: .checkbox(option: Input.Checkbox(placeholder: placeholder, selections: selections ?? [])), answer: .multiple(answer))
     }
     
     typealias Selection = [String]
     typealias Answer = [String]
     
     var selections: Selection? = []
-    var placeholder: Answer?
+    var placeholder: Answer? = []
     @Published var answer: Answer = []
     
     init(index: Int, question: Question) {
@@ -29,12 +29,11 @@ class CheckboxQuestionViewModel: QuestionViewModelProtocol, ObservableObject, Qu
         self.title = question.title
         self.subtitle = question.subtitle
         
-        if case .stringArray(let selections) = question.option?.selection {
-            self.selections = selections
-        }
-        if case .multiple(let placeholder) = question.option?.placeholder {
-            self.placeholder = placeholder
-            self.answer = placeholder
+        if case .checkbox(let option) = question.input,
+           let checkbox = option as? Input.Checkbox {
+            self.placeholder = checkbox.placeholder
+            self.answer = checkbox.placeholder ?? []
+            self.selections = checkbox.selections
         }
     }
     

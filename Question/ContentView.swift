@@ -14,12 +14,12 @@ struct ContentView: View {
         let questions: [QuestionViewModelProtocol] = qs.enumerated()
         .map { (index: Int, question: Question) -> QuestionViewModelProtocol in
             let index = index + 1
-            switch (question.option?.selection, question.option?.placeholder) {
-            case (.none, _):
+            switch question.input {
+            case .text:
                 return TextQuestionViewModel(index: index, question: question)
-            case (.stringArray, .single):
+            case .radio:
                 return RadioQuestionViewModel(index: index, question: question)
-            case (.stringArray, .multiple), (.stringArray, .none):
+            case .checkbox:
                 return CheckboxQuestionViewModel(index: index, question: question)
             }
         }
@@ -39,33 +39,39 @@ let json: Data = """
   {
     "title": "Question 1",
     "subtitle": "Question 1 subtitle",
-    "option": {
-        "selection": [
-            "Happy",
-            "Swift",
-            "Coding"
-        ],
-        "placeholder": [
-            "Happy"
-        ]
+    "input": {
+        "type": "checkbox",
+        "option": {
+            "selections": [
+                "Happy",
+                "Swift",
+                "Coding"
+            ],
+            "placeholder": ["Happy"]
+        }
     }
   },
   {
     "title": "Question 2",
-    "option": {
-        "selection": [
-            "Happy",
-            "Swift",
-            "Coding"
-        ],
-        "placeholder": "Swift"
+    "input": {
+        "type": "radio",
+        "option": {
+            "selections": [
+                "Happy",
+                "Swift",
+                "Coding"
+            ],
+            "placeholder": "Swift"
+        }
     }
   },
   {
     "title": "Question 3",
-    "option": {
-        "selection": null,
-        "placeholder": "Swift"
+    "input": {
+        "type": "text",
+        "option": {
+            "placeholder": "Placeholder"
+        }
     }
   }
 ]

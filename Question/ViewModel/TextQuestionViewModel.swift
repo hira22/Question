@@ -23,10 +23,10 @@ class TextQuestionViewModel: QuestionViewModelProtocol, ObservableObject, Questi
         self.index = index
         self.title = question.title
         self.subtitle = question.subtitle
-        
-        if case .single(let placeholder) = question.option?.placeholder {
-            self.placeholder = placeholder
-            self.answer = placeholder
+        if case .text(let option) = question.input,
+           let text = option as? Input.Text {
+            self.placeholder = text.placeholder
+            self.answer = text.placeholder ?? ""
         }
     }
     
@@ -40,6 +40,6 @@ class TextQuestionViewModel: QuestionViewModelProtocol, ObservableObject, Questi
 
 extension TextQuestionViewModel {
     func asQuestion() -> Question {
-        Question(title: title, subtitle: subtitle, option: Option(placeholder: .single(placeholder ?? ""), selection: nil), answer: .single(answer))
+        Question(title: title, subtitle: subtitle, input: .text(option: Input.Text(placeholder: placeholder)), answer: .single(answer))
     }
 }
